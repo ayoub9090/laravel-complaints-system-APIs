@@ -57,7 +57,7 @@ class ComplaintController extends Controller
      * update complaints
     */
     /**
-     * TODO: validate status if logged in user an admin
+     * Validate status if logged in user an admin
      */
     public function update(Request $request,$id)
     {
@@ -72,9 +72,9 @@ class ComplaintController extends Controller
         }
 
         if(auth()->user()['role'] === "admin"){
-
-            $id = auth()->user()->id;
-            return complaint::where('id', $id)->update($request->all() + ['checkedByID' => $id]);
+            $cid = $id;
+            $aid = auth()->user()->id;
+            return complaint::where('id', $cid)->update($request->all() + ['checkedByID' => $aid]);
         }
 
     }
